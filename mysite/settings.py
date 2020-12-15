@@ -113,9 +113,9 @@ JAZZMIN_SETTINGS = {
 
     # Custom links to append to app groups, keyed on app name
     "custom_links": {
-        "books": [{
-            "name": "Make Messages", 
-            "url": "make_messages", 
+        "dado": [{
+            "nome": "Make Messages", 
+            "atendente": "make_messages", 
             "icon": "fas fa-comments",
             "permissions": ["books.view_book"]
         }]
@@ -145,7 +145,7 @@ JAZZMIN_SETTINGS = {
     "custom_css": None,
     "custom_js": None,
     # Whether to show the UI customizer on the sidebar
-    "show_ui_builder": True,
+    "show_ui_builder": False,
 
     ###############
     # Change view #
