@@ -1,0 +1,56 @@
+python3 -m venv "myvenv" - criar ambiente virtual
+"myvenv"\Scripts\activate - ativar o ambient virtual
+python -m pip install --upgrade pip - instalar o pip
+criar txt chamado requirements.txt com o texto Django~=2.2.4
+usar pip install -r requirements.txt - instala django
+django-admin.exe startproject "mysite" .- cria diretorios do django
+abrir settings.py
+    mudar timezone: TIME_ZONE = 'America/Sao_Paulo'
+    mudar languade: LANGUAGE_CODE = 'pt-BR'
+
+    adicionar abaixo do STATIC_URL = '/static/' o code: STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+    editar o os allowed host para = ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+
+python manage.py migrate - cria banco de dados
+
+python manage.py runserver - iniciar servidor
+python manage.py startapp "blog"- criar aplicativo
+
+adicionar no setting.py/ installed_apps o "blog"
+
+no "blog"/models.py
+
+    from django.conf import settings
+from django.db import models
+from django.utils import timezone
+
+
+class "Post"(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null=True)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.title
+
+
+python manage.py makemigrations "blog" - falar que fez alteração no banco
+python manage.py migrate "blog" - aplicar a migração
+
+abrir "blog"/admin.py
+    colar: 
+    from django.contrib import admin
+    from .models import "Post"
+
+    admin.site.register("Post")
+
+python manage.py runserver
+
+python manage.py createsuperuser
